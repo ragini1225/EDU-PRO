@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 import { Star, Users, Clock, Filter, Search } from 'lucide-react';
 import { courses } from '../data/courses';
 const CoursesPage = ({ setCurrentPage, setSelectedCourse }) => {

@@ -11,15 +11,7 @@ import {
 import { courses } from "../data/course";
 import { useAuth } from "../contexts/AuthContext";
 
-interface CourseDetailPageProps {
-  courseId: string;
-  setCurrentPage: (page: string) => void;
-}
-
-export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
-  courseId,
-  setCurrentPage,
-}) => {
+const CourseDetailPage = ({ courseId, setCurrentPage }) => {
   const { user, enrollInCourse } = useAuth();
   const course = courses.find((c) => c.id === courseId);
 
@@ -41,8 +33,8 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
     );
   }
 
-  const isEnrolled = user?.enrolledCourses.includes(courseId) || false;
-  const isCompleted = user?.completedCourses.includes(courseId) || false;
+  const isEnrolled = user?.enrolledCourses?.includes(courseId) || false;
+  const isCompleted = user?.completedCourses?.includes(courseId) || false;
   const totalLessons = course.modules.reduce(
     (total, module) => total + module.lessons.length,
     0
@@ -68,6 +60,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
           <button
             onClick={() => setCurrentPage("courses")}
             className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+            aria-label="Back to Courses"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
             Back to Courses
@@ -111,7 +104,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                       }`}
                     />
                   ))}
-                  <span className="ml-2 text-lg">{course.rating}</span>
+                  <span className="ml-2 text-lg">{course.rating.toFixed(1)}</span>
                 </div>
                 <div className="flex items-center text-gray-200">
                   <Users className="h-5 w-5 mr-2" />
@@ -124,7 +117,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                 {course.duration} • {totalLessons} lessons
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-center">
                 {isEnrolled ? (
                   <button
                     onClick={handleStartLearning}
@@ -213,9 +206,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                             <h4 className="text-gray-900 font-medium">
                               {lesson.title}
                             </h4>
-                            <p className="text-gray-600 text-sm">
-                              {lesson.duration}
-                            </p>
+                            <p className="text-gray-600 text-sm">{lesson.duration}</p>
                           </div>
                           {lesson.type === "video" && (
                             <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
@@ -348,3 +339,5 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
     </div>
   );
 };
+
+export default CourseDetailPage;

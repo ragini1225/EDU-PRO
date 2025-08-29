@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Users, Award, BookOpen, Target, CheckCircle, Star, ArrowRight } from 'lucide-react';
 
 export const AboutPage = ({ setCurrentPage }) => {

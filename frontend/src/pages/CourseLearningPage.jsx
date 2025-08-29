@@ -8,7 +8,7 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [completedLessons, setCompletedLessons] = useState(new Set());
-  const [isPlaying, setIsPlaying] = useState(false);
+  
   const [showCongrats, setShowCongrats] = useState(false);
   const [progress, setProgress] = useState(0);
 

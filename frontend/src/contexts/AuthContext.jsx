@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password, name) => {
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Check if user exists in localStorage
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       let existingUser  = users.find((u) => u.email === email);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
           email,
           enrolledCourses: [],
           completedCourses: [],
-          certificates: []
+          certificates: [],
         };
         users.push(existingUser );
         localStorage.setItem('users', JSON.stringify(users));
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('currentUser ', JSON.stringify(existingUser ));
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('Login failed:', error);
@@ -66,11 +66,11 @@ export const AuthProvider = ({ children }) => {
     if (user && !user.enrolledCourses.includes(courseId)) {
       const updatedUser  = {
         ...user,
-        enrolledCourses: [...user.enrolledCourses, courseId]
+        enrolledCourses: [...user.enrolledCourses, courseId],
       };
       setUser (updatedUser );
       localStorage.setItem('currentUser ', JSON.stringify(updatedUser ));
-      
+
       // Update users array
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       const userIndex = users.findIndex((u) => u.id === user.id);
@@ -86,11 +86,11 @@ export const AuthProvider = ({ children }) => {
       const updatedUser  = {
         ...user,
         completedCourses: [...user.completedCourses, courseId],
-        certificates: [...user.certificates, courseId]
+        certificates: [...user.certificates, courseId],
       };
       setUser (updatedUser );
       localStorage.setItem('currentUser ', JSON.stringify(updatedUser ));
-      
+
       // Update users array
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       const userIndex = users.findIndex((u) => u.id === user.id);
@@ -106,8 +106,8 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     enrollInCourse,
-    completeCourse
+    completeCourse,
   };
 
-  return React.createElement(AuthContext.Provider, { value }, children);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
