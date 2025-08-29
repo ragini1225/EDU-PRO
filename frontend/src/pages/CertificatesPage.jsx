@@ -5,7 +5,7 @@ import {
   ExternalLink, Copy, MessageCircle, Users
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { courses } from '../data/course';
+import { courses } from '../data/courses';
 
 export const CertificatesPage = ({ setCurrentPage }) => {
   const { user } = useAuth();

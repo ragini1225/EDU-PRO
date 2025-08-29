@@ -8,7 +8,7 @@ import {
   Award,
   ArrowLeft,
 } from "lucide-react";
-import { courses } from "../data/course";
+import { courses } from "../data/courses";
 import { useAuth } from "../contexts/AuthContext";
 
 const CourseDetailPage = ({ courseId, setCurrentPage }) => {
