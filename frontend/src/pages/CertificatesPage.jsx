@@ -4,8 +4,8 @@ import {
   Star, Trophy, Share2, Eye, Sparkles, Medal, Crown,
   ExternalLink, Copy, MessageCircle, Users
 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import { courses } from '../data/courses';
+import { useAuth } from '../contexts/AuthContext.jsx';
+import { courses } from '../data/courses.js';
 
 export const CertificatesPage = ({ setCurrentPage }) => {
   const { user } = useAuth();

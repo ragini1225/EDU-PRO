@@ -8,8 +8,8 @@ import {
   Award,
   ArrowLeft,
 } from "lucide-react";
-import { courses } from "../data/courses";
-import { useAuth } from "../contexts/AuthContext";
+import { courses } from "../data/courses.js";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
 const CourseDetailPage = ({ courseId, setCurrentPage }) => {
   const { user, enrollInCourse } = useAuth();
@@ -340,4 +340,4 @@ const CourseDetailPage = ({ courseId, setCurrentPage }) => {
   );
 };
 
-export default CourseDetailPage;
+export { CourseDetailPage };

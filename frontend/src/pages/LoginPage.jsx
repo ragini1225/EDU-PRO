@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Lock, User, GraduationCap } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 const LoginPage = ({ setCurrentPage }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -13,7 +13,6 @@ const LoginPage = ({ setCurrentPage }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const success = await login(email, password, isLogin ? undefined : name);
       if (success) {
@@ -32,7 +31,7 @@ const LoginPage = ({ setCurrentPage }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      
+
       <div className="relative max-w-md w-full space-y-8">
         <div className="bg-white rounded-xl shadow-2xl p-8 animate-fade-in-up">
           {/* Header */}
@@ -167,4 +166,4 @@ const LoginPage = ({ setCurrentPage }) => {
   );
 };
 
-export default LoginPage;
+export { LoginPage };

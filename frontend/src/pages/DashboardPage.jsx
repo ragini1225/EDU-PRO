@@ -4,8 +4,8 @@ import {
   Video, Target, Zap, Users, Trophy, Flame, ArrowRight, Plus, Bell, Settings,
   BarChart3, Brain, Rocket, Crown, Medal, Gift, Coffee, Heart, Sparkles
 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import { courses } from '../data/courses';
+import { useAuth } from '../contexts/AuthContext.jsx';
+import { courses } from '../data/courses.js';
 
 export const DashboardPage = ({ setCurrentPage, setSelectedCourse }) => {
   const { user } = useAuth();

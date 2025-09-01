@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, BookOpen, CheckCircle, Clock, Award, ArrowLeft, FileText, Video } from 'lucide-react';
-import { courses } from '../data/courses';
-import { useAuth } from '../contexts/AuthContext';
+import { courses } from '../data/courses.js';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 const CourseLearningPage = ({ courseId, setCurrentPage }) => {
   const { user, completeCourse } = useAuth();
@@ -361,4 +361,4 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
   );
 };
 
-export default CourseLearningPage;
+export { CourseLearningPage };

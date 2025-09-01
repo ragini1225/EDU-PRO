@@ -369,7 +369,8 @@ export const courses = [
         ]
       }
     ]
-  },
+  }, 
+  
   {
     id: '10',
     title: 'Game Development with Unity',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GraduationCap, Menu, X, User, BookOpen, Award } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext.jsx';
+
 
 const Navbar = ({ currentPage, setCurrentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -170,4 +171,4 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
   );
 };
 
-export default Navbar;
+export { Navbar };
