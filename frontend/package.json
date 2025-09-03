@@ -1,8 +1,10 @@
 {
   "name": "frontend",
   "private": true,
+   "homepage": "http://EDU pro.com/visioninternz.in/",
   "version": "0.0.0",
   "type": "module",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",

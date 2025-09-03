@@ -1,26 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, BookOpen, CheckCircle, Clock, Award, ArrowLeft, FileText, Video } from 'lucide-react';
-import { courses } from '../data/courses.js';
-import { useAuth } from '../contexts/AuthContext.jsx';
+import React, { useState, useEffect } from "react";
+import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  BookOpen,
+  CheckCircle,
+  Clock,
+  Award,
+  ArrowLeft,
+  FileText,
+  Video,
+} from "lucide-react";
+import { courses } from "../data/Courses.js";
+import { useAuth } from "../contexts/AuthContext.jsx";
 
 const CourseLearningPage = ({ courseId, setCurrentPage }) => {
   const { user, completeCourse } = useAuth();
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [completedLessons, setCompletedLessons] = useState(new Set());
-  
+
   const [showCongrats, setShowCongrats] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const course = courses.find(c => c.id === courseId);
+  const course = courses.find((c) => c.id === courseId);
 
   useEffect(() => {
     if (course) {
-      const totalLessons = course.modules.reduce((total, module) => total + module.lessons.length, 0);
+      const totalLessons = course.modules.reduce(
+        (total, module) => total + module.lessons.length,
+        0
+      );
       const completedCount = completedLessons.size;
       setProgress((completedCount / totalLessons) * 100);
 
-      if (completedCount === totalLessons && !user?.completedCourses.includes(courseId)) {
+      if (
+        completedCount === totalLessons &&
+        !user?.completedCourses.includes(courseId)
+      ) {
         setShowCongrats(true);
         completeCourse(courseId);
       }
@@ -31,9 +49,11 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Course Not Found</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Course Not Found
+          </h2>
           <button
-            onClick={() => setCurrentPage('dashboard')}
+            onClick={() => setCurrentPage("dashboard")}
             className="text-blue-600 hover:text-blue-700"
           >
             Back to Dashboard
@@ -47,10 +67,14 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h2>
-          <p className="text-gray-600 mb-4">You need to enroll in this course first.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Access Denied
+          </h2>
+          <p className="text-gray-600 mb-4">
+            You need to enroll in this course first.
+          </p>
           <button
-            onClick={() => setCurrentPage('course-detail')}
+            onClick={() => setCurrentPage("course-detail")}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
           >
             Enroll Now
@@ -62,10 +86,13 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
 
   const currentModule = course.modules[currentModuleIndex];
   const currentLesson = currentModule?.lessons[currentLessonIndex];
-  const totalLessons = course.modules.reduce((total, module) => total + module.lessons.length, 0);
+  const totalLessons = course.modules.reduce(
+    (total, module) => total + module.lessons.length,
+    0
+  );
 
   const markLessonComplete = (lessonId) => {
-    setCompletedLessons(prev => new Set(prev).add(lessonId));
+    setCompletedLessons((prev) => new Set(prev).add(lessonId));
   };
 
   const goToNextLesson = () => {
@@ -82,7 +109,9 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
       setCurrentLessonIndex(currentLessonIndex - 1);
     } else if (currentModuleIndex > 0) {
       setCurrentModuleIndex(currentModuleIndex - 1);
-      setCurrentLessonIndex(course.modules[currentModuleIndex - 1].lessons.length - 1);
+      setCurrentLessonIndex(
+        course.modules[currentModuleIndex - 1].lessons.length - 1
+      );
     }
   };
 
@@ -100,14 +129,16 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Award className="h-8 w-8 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Congratulations! 🎉</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Congratulations! 🎉
+            </h2>
             <p className="text-gray-600 mb-6">
               You've successfully completed <strong>{course.title}</strong>!
               Your certificate is ready.
             </p>
             <div className="flex gap-4">
               <button
-                onClick={() => setCurrentPage('certificates')}
+                onClick={() => setCurrentPage("certificates")}
                 className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
               >
                 View Certificate
@@ -129,13 +160,15 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <button
-                onClick={() => setCurrentPage('dashboard')}
+                onClick={() => setCurrentPage("dashboard")}
                 className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mr-6"
               >
                 <ArrowLeft className="h-5 w-5 mr-2" />
                 Back to Dashboard
               </button>
-              <h1 className="text-xl font-semibold text-gray-900">{course.title}</h1>
+              <h1 className="text-xl font-semibold text-gray-900">
+                {course.title}
+              </h1>
             </div>
             <div className="flex items-center space-x-4">
               <div className="text-sm text-gray-600">
@@ -157,15 +190,22 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
           {/* Sidebar - Course Content */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-lg p-4 sticky top-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Course Content</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Course Content
+              </h3>
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {course.modules.map((module, moduleIndex) => (
-                  <div key={module.id} className="border border-gray-200 rounded-lg">
+                  <div
+                    key={module.id}
+                    className="border border-gray-200 rounded-lg"
+                  >
                     <div className="p-3 bg-gray-50">
                       <h4 className="font-medium text-gray-900 text-sm">
                         {module.title}
                       </h4>
-                      <p className="text-xs text-gray-600">{module.lessons.length} lessons</p>
+                      <p className="text-xs text-gray-600">
+                        {module.lessons.length} lessons
+                      </p>
                     </div>
                     <div className="divide-y divide-gray-100">
                       {module.lessons.map((lesson, lessonIndex) => (
@@ -173,13 +213,14 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                           key={lesson.id}
                           onClick={() => goToLesson(moduleIndex, lessonIndex)}
                           className={`w-full text-left p-3 hover:bg-blue-50 transition-colors ${
-                            currentModuleIndex === moduleIndex && currentLessonIndex === lessonIndex
-                              ? 'bg-blue-100 border-l-4 border-blue-500'
-                              : ''
+                            currentModuleIndex === moduleIndex &&
+                            currentLessonIndex === lessonIndex
+                              ? "bg-blue-100 border-l-4 border-blue-500"
+                              : ""
                           }`}
                         >
                           <div className="flex items-center">
-                            {lesson.type === 'video' ? (
+                            {lesson.type === "video" ? (
                               <Video className="h-4 w-4 text-gray-400 mr-2" />
                             ) : (
                               <FileText className="h-4 w-4 text-gray-400 mr-2" />
@@ -188,7 +229,9 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                               <p className="text-sm font-medium text-gray-900 truncate">
                                 {lesson.title}
                               </p>
-                              <p className="text-xs text-gray-500">{lesson.duration}</p>
+                              <p className="text-xs text-gray-500">
+                                {lesson.duration}
+                              </p>
                             </div>
                             {completedLessons.has(lesson.id) && (
                               <CheckCircle className="h-4 w-4 text-green-500" />
@@ -210,8 +253,12 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900">{currentLesson?.title}</h2>
-                    <p className="text-gray-600">Module {currentModuleIndex + 1}: {currentModule?.title}</p>
+                    <h2 className="text-2xl font-bold text-gray-900">
+                      {currentLesson?.title}
+                    </h2>
+                    <p className="text-gray-600">
+                      Module {currentModuleIndex + 1}: {currentModule?.title}
+                    </p>
                   </div>
                   <div className="flex items-center text-gray-500">
                     <Clock className="h-4 w-4 mr-1" />
@@ -220,7 +267,7 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                 </div>
 
                 {/* Video Player */}
-                {currentLesson?.type === 'video' && currentLesson.videoUrl && (
+                {currentLesson?.type === "video" && currentLesson.videoUrl && (
                   <div className="relative aspect-video bg-black rounded-lg overflow-hidden mb-6">
                     {currentLesson.youtubeVideoId ? (
                       <iframe
@@ -245,14 +292,16 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                 )}
 
                 {/* Live Session */}
-                {currentLesson?.type === 'live' && (
+                {currentLesson?.type === "live" && (
                   <div className="relative aspect-video bg-gradient-to-r from-red-500 to-pink-500 rounded-lg overflow-hidden mb-6 flex items-center justify-center">
                     <div className="text-center text-white">
                       <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
                         <Video className="h-10 w-10" />
                       </div>
                       <h3 className="text-2xl font-bold mb-2">Live Session</h3>
-                      <p className="text-lg opacity-90 mb-4">{currentLesson.title}</p>
+                      <p className="text-lg opacity-90 mb-4">
+                        {currentLesson.title}
+                      </p>
                       <div className="flex items-center justify-center mb-4">
                         <div className="w-3 h-3 bg-white rounded-full animate-pulse mr-2"></div>
                         <span>Next session: Today 6:00 PM</span>
@@ -265,7 +314,7 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                 )}
 
                 {/* Text Content */}
-                {currentLesson?.type === 'text' && (
+                {currentLesson?.type === "text" && (
                   <div className="bg-gray-50 rounded-lg p-6 mb-6">
                     <div className="prose max-w-none">
                       <p className="text-gray-700 leading-relaxed">
@@ -277,7 +326,9 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
 
                 {/* Lesson Content */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Lesson Overview</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    Lesson Overview
+                  </h3>
                   <p className="text-gray-700">{currentLesson?.content}</p>
                 </div>
 
@@ -285,7 +336,9 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                 <div className="flex items-center justify-between border-t pt-6">
                   <button
                     onClick={goToPreviousLesson}
-                    disabled={currentModuleIndex === 0 && currentLessonIndex === 0}
+                    disabled={
+                      currentModuleIndex === 0 && currentLessonIndex === 0
+                    }
                     className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     <SkipBack className="h-5 w-5 mr-2" />
@@ -293,9 +346,11 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
                   </button>
 
                   <div className="flex items-center space-x-4">
-                    {!completedLessons.has(currentLesson?.id || '') && (
+                    {!completedLessons.has(currentLesson?.id || "") && (
                       <button
-                        onClick={() => currentLesson && markLessonComplete(currentLesson.id)}
+                        onClick={() =>
+                          currentLesson && markLessonComplete(currentLesson.id)
+                        }
                         className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center"
                       >
                         <CheckCircle className="h-4 w-4 mr-2" />
@@ -321,18 +376,26 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
 
             {/* Progress Summary */}
             <div className="bg-white rounded-lg shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Progress</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Your Progress
+              </h3>
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{completedLessons.size}</div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    {completedLessons.size}
+                  </div>
                   <div className="text-gray-600">Completed Lessons</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">{totalLessons}</div>
+                  <div className="text-2xl font-bold text-gray-900">
+                    {totalLessons}
+                  </div>
                   <div className="text-gray-600">Total Lessons</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{Math.round(progress)}%</div>
+                  <div className="text-2xl font-bold text-green-600">
+                    {Math.round(progress)}%
+                  </div>
                   <div className="text-gray-600">Progress</div>
                 </div>
               </div>
@@ -343,12 +406,22 @@ const CourseLearningPage = ({ courseId, setCurrentPage }) => {
 
       <style jsx>{`
         @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
         @keyframes scale-in {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
