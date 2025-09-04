@@ -12,7 +12,7 @@ import {
   FileText,
   Video,
 } from "lucide-react";
-import { courses } from "../data/Courses.js";
+import { courses } from "../data/courses.js";
 import { useAuth } from "../contexts/AuthContext.jsx";
 
 const CourseLearningPage = ({ courseId, setCurrentPage }) => {

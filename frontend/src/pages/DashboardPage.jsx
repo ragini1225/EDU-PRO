@@ -29,7 +29,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { courses } from "../data/Courses.js";
+import { courses } from "../data/courses.js";
 import { AIChatbot } from '../components/AIChatbot.jsx';
 export const DashboardPage = ({ setCurrentPage, setSelectedCourse }) => {
   const { user } = useAuth();

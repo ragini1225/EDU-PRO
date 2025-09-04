@@ -1,6 +1,6 @@
 import React from 'react';
 import { Star, Users, Clock, TrendingUp, BookOpen, Award, ChevronRight, Play, Calendar, Globe, Zap, Target, Video, Sparkles, Trophy, ArrowRight, CheckCircle, MessageCircle, Brain, Rocket, Heart } from 'lucide-react';
-import { courses } from '../data/Courses.js';
+import { courses } from '../data/courses.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 
 export const HomePage = ({ setCurrentPage, setSelectedCourse }) => {

@@ -9,7 +9,7 @@ import {
   TrendingUp,
   Sparkles,
 } from "lucide-react";
-import { courses } from "../data/Courses.js";
+import { courses } from "../data/courses.js";
 
 const CoursesPage = ({ setCurrentPage, setSelectedCourse }) => {
   const [searchTerm, setSearchTerm] = useState("");
